@@ -1,5 +1,24 @@
 var express = require('express');
+var swig = require('swig');
 var app = express(); //creates instance of express app
+
+var locals = {
+	title: "An Example",
+	people: [
+		{name: 'Gandalf'},
+		{name: 'Frodo'},
+		{name: 'Hermione'}
+	]
+};
+
+swig.setDefaults({ cache: false });
+swig.renderFile(__dirname + "/views/index.html", locals, function(err, output) {
+	console.log(output);
+});
+
+app.engine('html', require('swig').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
 
 app.use(function (req, res, next) {
     // do your logging here
@@ -17,7 +36,7 @@ app.use('/special/', function (req, res, next) {
 });
 
 app.get('/', function(req, res){
-  res.send('Hello World!');
+  	res.render('index', locals);
 });
 
 app.get('/news', function(req, res){
