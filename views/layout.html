@@ -94,6 +94,38 @@
       console.log(tweet);
       alert('Refreshing... check the console...');
       // some logic to add the new tweet to the DOM…
+      var tweetList = document.getElementById('tweetList');
+
+      var newTweetDiv = document.createElement("div");
+      var header = document.createElement("h4");
+      var headerLink = document.createElement("a");
+      headerLink.style = "color: black";
+      headerLink.href = "/users/" + tweet.name;
+      var headerText = document.createTextNode(tweet.name);
+      headerLink.appendChild(headerText);
+      header.appendChild(headerLink);
+
+      var text = document.createElement("p");
+      var paraText = document.createTextNode(tweet.text);
+      text.appendChild(paraText);
+
+      var reTweet = document.createElement("a");
+      reTweet.href = "http://www.twitter.com";
+      var reTweetText = document.createTextNode("Re-tweet");
+      reTweet.appendChild(reTweetText);
+
+      var view = document.createElement("a");
+      view.href = "/tweets/" + tweet.uniqueID;
+      var viewText = document.createTextNode("View");
+      view.appendChild(viewText);
+
+      newTweetDiv.appendChild(header);
+      newTweetDiv.appendChild(text);
+      newTweetDiv.appendChild(reTweet);
+      newTweetDiv.appendChild(view);
+
+      tweetList.insertBefore(newTweetDiv, tweetList[0]);
+
     }); 
   </script>
 </html>

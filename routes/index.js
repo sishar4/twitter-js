@@ -11,7 +11,6 @@ module.exports = function(io) {
 
 	router.get('/', function(req, res) {
 		var tweets = tweetBank.list();
-		console.log(tweets[0].name);
 		res.render('index', {title: 'Twitter.js', tweets: tweets, showForm: true});
 	});
 
